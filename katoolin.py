@@ -39,7 +39,7 @@ def main():
 			''')
 
 				opcion0 = raw_input("\033[1;36mkat > \033[1;m")
-			
+
 				while opcion0 == "1":
 					print ('''
 1) Add kali linux repositories
@@ -59,14 +59,13 @@ def main():
 						outfile = "/etc/apt/sources.list"
 
 						delete_list = ["# Kali linux repositories | Added by Katoolin\n", "deb http://http.kali.org/kali kali-rolling main contrib non-free\n"]
-						fin = open(infile)
-						os.remove("/etc/apt/sources.list")
-						fout = open(outfile, "w+")
-						for line in fin:
-						    for word in delete_list:
-						        line = line.replace(word, "")
-						    fout.write(line)
-						fin.close()
+						with open(infile) as fin:
+							os.remove("/etc/apt/sources.list")
+							fout = open(outfile, "w+")
+							for line in fin:
+							    for word in delete_list:
+							        line = line.replace(word, "")
+							    fout.write(line)
 						fout.close()
 						print ("\033[1;31m\nAll kali linux repositories have been deleted !\n\033[1;m")
 					elif repo == "back":
@@ -80,7 +79,7 @@ def main():
 
 					else:
 						print ("\033[1;31mSorry, that was an invalid command!\033[1;m") 					
-						
+
 
 				if opcion0 == "3":
 					print (''' 
@@ -542,7 +541,7 @@ For more information , please visit : http://www.florian-diesch.de/software/clas
 						''')
 							print ("\033[1;32mInsert the number of the tool to install it .\n\033[1;m")
 
-							
+
 							opcion2 = raw_input("\033[1;36mkat > \033[1;m")
 							if opcion2 == "1":
 								cmd = os.system("apt-get install apache-users")
@@ -1291,6 +1290,7 @@ For more information , please visit : http://www.florian-diesch.de/software/clas
 								inicio1()
 
 				inicio()
+
 		inicio1()
 	except KeyboardInterrupt:
 		print ("Shutdown requested...Goodbye...")
