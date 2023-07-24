@@ -225,11 +225,7 @@ def num_tools():
 	"""
 	Obtains the number of tools available
 	"""
-	num = 0
-	for name in categories.items():
-		tools = name[1][1]
-		num+= len(tools)
-	return num
+	return sum(len(name[1][1]) for name in categories.items())
 
 def format(category):
 	category = category.replace('_', ' ')
